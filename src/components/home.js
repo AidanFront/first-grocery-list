@@ -75,8 +75,6 @@ class Home extends Component {
 
   upDateCategory(index, event) {
     this.setState({...this.state, groceries : this.state.groceries.map((itemEach,idx) => {
-      console.log(itemEach, event.currentTarget.value);
-      console.log(index);
       if (index === idx) {
         return {...itemEach, categories: event.currentTarget.value.split(",")} 
       } else {
@@ -92,7 +90,6 @@ class Home extends Component {
   }
   
   categoryFilter(category, event) {
-    console.log(category);
     this.setState({...this.state, filter: category })
   }
     render() {
