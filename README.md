@@ -1,4 +1,7 @@
 ### NAB GROCERY TEST 
+Put in details and click 'Add New' to add an item to a grocery list.
+To filter gorcery list for category tags, click on a grocery item tag.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
