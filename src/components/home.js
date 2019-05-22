@@ -18,21 +18,22 @@ class Home extends Component {
     super(props);
     this.state = { 
       groceries: [
-        {editing: true, name: "potatoe", price: "1", "categories": []},
-        {editing: false, name: "apple", price: "1", "categories": ["Fruit", "Bio"]},
-      ]
+        {editing: true, name: "Potatoe", price: "1", "categories": []},
+        {editing: false, name: "Apple", price: "1", "categories": ["Fruit", "Bio"]},
+      ],
+      filter: ""
     };
   }
   
   add(text) {
-    var arr = this.state.groceries;
-    arr.push(
+    const arr = this.state.groceries;
+    const newlist = arr.concat(
       { editing: false, 
         name: this.refs.newName.value, 
         price: this.refs.newPrice.value, 
         "categories": [this.refs.newCategory.value]}
       );
-    this.setState({groceries: arr});
+    this.setState({groceries: newlist});
   }
 
   
@@ -84,12 +85,16 @@ class Home extends Component {
     })
   })}
   
-  removeItem( index, event) {
+  removeItem(index, event) {
     this.setState({...this.state, groceries : this.state.groceries.filter((itemEach,idx) => {
       return index !== idx
     })})
   }
-    
+  
+  categoryFilter(category, event) {
+    console.log(category);
+    this.setState({...this.state, filter: category })
+  }
     render() {
     
     return (
@@ -112,9 +117,9 @@ class Home extends Component {
                       <div className="pl-2">
                         <strong><span>{eachItem.name}</span></strong>
                         <span className="pl-2">$ {eachItem.price}</span>
-                        <span className="pl-2">
-                          {eachItem.categories.map((eachCategory, indexCategory) => 
-                            (<div key={indexCategory}>{eachCategory}</div>)
+                        <span className="d-inline-flex pl-2">
+                          {eachItem.categories.map((category, indexCategory) => 
+                            (<button key={indexCategory} onClick={this.categoryFilter.bind(this, category)} className="text-warning">{category}&nbsp;</button>)
                           )}
                         </span>
                       </div>
@@ -140,6 +145,26 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
+                )
+              })}
+          </div>
+          <div className="border px-1 py-2 mt-5">
+              <h3 className="">Filtered List</h3>
+              { this.state.groceries.filter(groceryItem => groceryItem.categories.some(category => category === this.state.filter)).map((groceryItem , index) => {
+                return (
+                    
+                      <div className="border d-flex justify-content-between p-1">
+                          <div className="pl-2">
+                            <strong><span>{groceryItem.name}</span></strong>
+                            <span className="pl-2">$ {groceryItem.price}</span>
+                            <span className="d-inline-flex pl-2">
+                              {groceryItem.categories.map((category, indexCategory) => 
+                                (<button key={indexCategory} onClick={this.categoryFilter.bind(this, category)} className="text-warning">{category}&nbsp;</button>)
+                              )}
+                            </span>
+                          </div>
+                        </div>
+                    
                 )
               })}
           </div>
