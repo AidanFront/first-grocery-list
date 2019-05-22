@@ -17,10 +17,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      groceries: [
-        {editing: true, name: "Potatoe", price: "1", "categories": []},
-        {editing: false, name: "Apple", price: "1", "categories": ["Fruit", "Bio"]},
-      ],
+      groceries: [],
       filter: ""
     };
   }
@@ -165,7 +162,7 @@ class Home extends Component {
                 )
               })}
           </div>
-          {JSON.stringify(this.state)}
+          {/* {JSON.stringify(this.state)} */}
         </div>
     );
   }
